@@ -2,11 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, clearCart, removeToCart } from "@/redux/slice/cart.slice";
 import { BsFillCartXFill } from "react-icons/bs";
 import EmptyCart from "../EmptyCard/EmptyCard";
+import { useState } from "react";
+import CheckoutModal from "../CheckOutModal/CheckOutModal";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cart);
   console.log(cartItems);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -25,6 +29,14 @@ const Cart = () => {
       const itemPrice = parseFloat((item.idMeal / 1000).toFixed(3));
       return total + itemPrice * item?.quantity;
     }, 0);
+  };
+
+  const handleCheckout = () => {
+    setIsModalOpen(true); 
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
 
@@ -61,9 +73,11 @@ const Cart = () => {
         <div className="w-[300px] max-h-[200px] border rounded-md shadow-md mb-4 p-4 mt-4">
             <h2 className="text-xl font-semibold mb-4">Total Price</h2>
             <p className="text-green-500 text-2xl font-bold">{calculateTotalPrice().toFixed(3)} SUM </p>
+            <button  onClick={handleCheckout} className="mt-10 mx-14 bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none"> Go to checkout </button>
           </div>
         </div>
       )}
+      <CheckoutModal isOpen={isModalOpen} handleClose={handleCloseModal} />
     </div>
   );
 };
