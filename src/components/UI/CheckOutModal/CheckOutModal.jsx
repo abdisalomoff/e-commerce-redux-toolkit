@@ -13,9 +13,9 @@ const CheckoutModal = ({ isOpen, handleClose }) => {
     >
       <Fade in={isOpen}>
         <div className=" p-6 rounded-md">
-          <div className='bg-orange-200 w-[400px] mx-auto my-auto'>
+          <div className='bg-white w-[400px] mx-auto my-auto p-10'>
           <h2 className="text-2xl text-center font-semibold mb-4">Your payment confirmed</h2>
-          <Button className='mx-auto' variant="contained" color="primary" onClick={handleClose}>
+          <Button className='mx-auto ms-20' variant="contained" color="primary" onClick={handleClose}>
             Close
           </Button>
           </div>
